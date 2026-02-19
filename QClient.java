@@ -8,6 +8,13 @@
 //DEPS io.quarkus:quarkus-rest-client-jackson
 //Q:CONFIG quarkus.banner.enabled=false
 //Q:CONFIG quarkus.log.level=WARN
+//Q:CONFIG quarkus.rest-client."echo-api".url=https://localhost:8443
+//Q:CONFIG quarkus.rest-client.\"echo-api\".key-store=file:certs/client.p12
+//Q:CONFIG quarkus.rest-client."echo-api".key-store-password=changeit
+//Q:CONFIG quarkus.rest-client."echo-api".key-store-type=PKCS12
+//Q:CONFIG quarkus.rest-client."echo-api".trust-store=file:certs/client-trust.p12
+//Q:CONFIG quarkus.rest-client."echo-api".trust-store-password=changeit
+//Q:CONFIG quarkus.rest-client."echo-api".trust-store-type=PKCS12
 
 import picocli.CommandLine;
 

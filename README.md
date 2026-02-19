@@ -7,22 +7,31 @@ This playground shows a working mTLS handshake, then a predictable failure by sw
 Start the server:
 
 ```
-jbang --fresh -Dquarkus.config.locations=server-jks.properties QServer.java
+jbang --fresh QServer.java
 ```
 
 Run the client (success):
 
 ```
-jbang --fresh -Dquarkus.config.locations=client-jks.properties QClient.java --message "hello"
+jbang --fresh QClient.java --message "hello"
 ```
 
-Run the client (failure):
+### Switching to bad credentials
 
-```
-jbang --fresh -Dquarkus.config.locations=client-bad-jks.properties QClient.java --message "hello"
+To test with bad credentials, edit the Java file to reference the bad config:
 
-Note: JBang caches the Quarkus augmentation step. If you edit properties or certificates, rerun with `--fresh` to avoid using stale config.
+**For client:**
+Change `//FILES application-client.properties` to `//FILES application-client-bad.properties` in `QClient.java`, then:
 ```
+jbang --fresh QClient.java --message "hello"
+```
+
+This should fail with an SSL/TLS handshake error.
+
+**Note:**
+- Configuration files are embedded using `//FILES` and automatically loaded via Quarkus profiles.
+- To switch between good/bad credentials, edit the `//FILES` reference in the Java file.
+- Rerun with `--fresh` to clear JBang's cache and reload the configuration.
 
 ## Files
 
